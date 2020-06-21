@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+
+  prometheus_app:
+    image: prom/prometheus
+    container_name: prometheus_local
+    ports:
+      - "9888:9090"
+    restart: always
+    extra_hosts:
+      - "myapi:${MY_DOCKER_HOST}"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - datavolume:/prometheus
+volumes:
+  datavolume:
